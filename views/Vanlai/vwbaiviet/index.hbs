@@ -1,0 +1,21 @@
+<div class="card showdow">
+    <h4 class="card-header">
+        Danh Sach Chuyen Muc Bai Viet
+    </h4>
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">IDChuyenMuc</th>
+      <th scope="col">TenChuyenMuc</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.chuyenmucbaiviet}}
+        <tr>
+          <th scope="row">{{IdChuyenMuc}}</th>
+          <td>{{TenChuyenMuc}}</td>
+        </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
