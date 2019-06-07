@@ -5,7 +5,6 @@ router.get('/',(req,res)=>{
     var p= baivietModel.all();
     p.then(rows=>{
             console.log(rows);
-           
             res.render('Vanlai/vwbaiviet/index',{
                 chuyenmucbaiviet: rows
             });

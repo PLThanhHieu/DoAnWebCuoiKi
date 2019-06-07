@@ -25,5 +25,19 @@ module.exports={
                 connection.end();
             });
         });
+    },
+    loadbaiviet: sql=>{
+        return new Promise((resolve, reject)=>{
+            var connection=createConnection();
+            connection.connect();
+            connection.query(sql,(error,resutls,fields)=>{
+                if(error) 
+                    reject(error);
+                else{
+                    resolve(resutls);
+                }
+                connection.end();
+            });
+        });
     }
 };

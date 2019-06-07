@@ -1,8 +1,25 @@
-<div class="card showdow">
+{{!-- <div class="card showdow">
     <div class="card-header">
         Featured
     </div>
     <div class="card-body">
         <h1>Express Bao Dien Tu</h1>
     </div>
+</div> --}}
+{{#each this.baiviets}}
+<div class="card shadow mt-3">
+  <div class="card-header">
+    {{TieuDe}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{TomTat}}</h5>
+    <p class="card-text">{{NoiDungBaiViet}}</p>
+    <p>{{NgayDang}}</p>
+    <p>{{ChuyenMuc}}</p>
+   
+  </div>
+  <div class="card-footer text-muted">
+    <p>{{LuotXem}}</p>
+  </div>
 </div>
+{{/each}}

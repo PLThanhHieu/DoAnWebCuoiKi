@@ -1,6 +1,6 @@
 var express= require('express');
 var exphbs= require('express-handlebars');
-
+var baivietModel=require('./models/baiviet.model');
 var app=express();
 
 app.engine('hbs',exphbs({
@@ -10,8 +10,18 @@ app.engine('hbs',exphbs({
 app.set('view engine','hbs');
 
 app.get('/',(req,res)=>{
+    var p=baivietModel.loadAllbaiviet();
+    p.then(rows=>{
+        console.log(rows);
+        res.render('home',{
+            baiviets: rows
+        });
+    }).catch(err=>{
+            console.log(err);
+        }
+    );
+    //res.render('home');
     
-    res.render('home');
 })
 
 app.use('/Vanlai/baiviet', require('./routes/Vanlai/baiviet.route'));
