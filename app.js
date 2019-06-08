@@ -1,8 +1,15 @@
 var express= require('express');
 var exphbs= require('express-handlebars');
-var baivietModel=require('./models/baiviet.model');
+var morgan=require('morgan');
+
+
 var app=express();
 
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
+
+var baivietModel=require('./models/baiviet.model');
 app.engine('hbs',exphbs({
      defaultLayout: 'main.hbs',
      layoutsDir: 'views/_layouts'
@@ -20,11 +27,12 @@ app.get('/',(req,res)=>{
             console.log(err);
         }
     );
-    //res.render('home');
     
 })
 
-app.use('/Vanlai/baiviet', require('./routes/Vanlai/baiviet.route'));
+app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
+//app.use(require('./middlewares/locals.mdw'));
+
 
 app.listen(3000,()=>{
     console.log('Web Server is running at http://localhost:3000');

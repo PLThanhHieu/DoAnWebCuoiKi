@@ -49,13 +49,13 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="card showdow">
-                <div class="card-header">
-                    Featured
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h4 class="card-header">
+                    Chuyên mục
+                </h4>
+                <div class="list-group list-group-flush">
+                  {{#each lcchuyenmucs}}
+                  <a href="#" class="list-group-item list-group-item-action active">{{TenChuyenMuc}}</a>
+                  {{/each}}
                 </div>
             </div>
         </div>

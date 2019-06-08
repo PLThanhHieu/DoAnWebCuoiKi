@@ -1,0 +1,40 @@
+<div class="shadow" >
+    <h4 class="card-header" >
+        Chỉnh sữa chuyên mục
+    </h4>
+    <div class="card-body">
+        {{#if this.error}}
+            <div class="alert alert-danger" role="alert">
+                Không tồn tại chuyên mục <a href="/Admin/chuyenmuc" class="alert-link">Trờ lại</a>
+            </div>
+        {{else}}
+            <form method="POST" action="/Admin/chuyenmuc/update">
+            <div class="form-group">
+                <label for="txtIdChuyenMuc">ID</label>
+                <input readonly type="text" class="form-control" id="txtIdChuyenMuc" name="IdChuyenMuc"
+                    placeholder="Tên chuyên mục mới" autofocus value="{{this.chuyenmuc.IdChuyenMuc}}">
+            </div>
+            <div class="form-group">
+                <label for="txtChuyenMuc">Chuyên mục</label>
+                <input type="text" class="form-control" id="txtChuyenmuc" name="TenChuyenMuc"
+                    placeholder="Tên chuyên mục mới" autofocus value="{{this.chuyenmuc.TenChuyenMuc}}">
+            </div>
+            <a class="btn btn-primary" href="/Admin/chuyenmuc" role="button">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+                Back
+            </a>
+            <button type="submit" class="btn btn-outline-danger" formaction="/Admin/chuyenmuc/delete">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                Delete
+            </button>
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </form>
+        {{/if}}
+        
+
+        
+    </div>
+</div>
