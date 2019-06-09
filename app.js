@@ -30,6 +30,33 @@ app.get('/',(req,res)=>{
     
 })
 
+app.get('/chitiet/:id',(req,res)=>{
+    var id=req.params.id;
+    if(isNaN(id))
+    {
+        res.render('chitiet',{
+            error: true,  
+        });
+    }
+    baivietModel.chitietbaiviet(id).then(rows=>{
+            if(rows.length>0){
+                res.render('chitiet',{
+                    error: false,
+                    baiviet: rows[0]  
+                });
+            }
+            else{
+                res.render('chitiet',{
+                    error: true,
+                     
+                });
+            }
+        }
+    ).catch(err=>{
+        console.log(err);
+    }); 
+})
+
 app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
 //app.use(require('./middlewares/locals.mdw'));
 

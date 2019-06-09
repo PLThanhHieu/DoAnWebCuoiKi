@@ -12,7 +12,7 @@
     <div class="card-body">
         <div class="row">
             {{#each this.baiviets}}
-                <div class="col-sm-4">
+                <div class="col-sm-4"> 
                 <div class="card h-75">
                     <div class="card-header">
                         {{TieuDe}}
@@ -22,9 +22,12 @@
                         <p class="card-text">{{NoiDungBaiViet}}</p>
                         <p class="card-text">Chuyên mục: {{ChuyenMuc}}</p>
                         <p class="card-text">Ngày đăng: {{NgayDang}}</p>
+                        <p class="card-text"> Lượt xem : {{LuotXem}}</p>
                     </div>
-                    <div class="card-footer text-muted">
-                        Lượt xem : {{LuotXem}}
+                    <div class="card-footer text-center">
+                    <a class="btn btn-primary btn-sm" href="chitiet/{{IdBaiViet}}" role="button">
+                       <i class="fas fa-plus" aria-hidden="true"></i>
+                    </a>
                     </div>
                 </div>
                 </div>
