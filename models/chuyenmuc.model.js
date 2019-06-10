@@ -2,19 +2,19 @@ var db=require('../utils/db');
 
 module.exports={
     all:()=>{
-        return db.load('select * from chuyenmuccacbaiviet');
+        return db.load('select * from chuyenmuccap2');
     }, 
     addChuyenmuc:entity=>{
-        return db.addChuyenmuc('chuyenmuccacbaiviet', entity);
+        return db.addChuyenmuc('chuyenmuccap2', entity);
     },
     single:id=>{
-        return db.load(`select * from chuyenmuccacbaiviet where IdChuyenMuc =${id}`);
+        return db.load(`select * from chuyenmuccap2 where IdChuyenMucCap2 =${id}`);
     },
     updateChuyenmuc:entity=>{
-        return db.updateChuyenmuc('chuyenmuccacbaiviet','IdChuyenMuc', entity);
+        return db.updateChuyenmuc('chuyenmuccap2','IdChuyenMucCap2', entity);
     },
     deleteChuyenmuc:id=>{
-        return db.deleteChuyenmuc('chuyenmuccacbaiviet','IdChuyenMuc', id);
+        return db.deleteChuyenmuc('chuyenmuccap2','IdChuyenMucCap2', id);
     }
 
 };

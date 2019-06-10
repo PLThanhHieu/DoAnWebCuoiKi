@@ -12,7 +12,8 @@ app.use(express.urlencoded());
 var baivietModel=require('./models/baiviet.model');
 app.engine('hbs',exphbs({
      defaultLayout: 'main.hbs',
-     layoutsDir: 'views/_layouts'
+     layoutsDir: 'views/_layouts',
+     helpers: require('./helpers')
 }));
 app.set('view engine','hbs');
 
@@ -42,7 +43,7 @@ app.get('/chitiet/:id',(req,res)=>{
             if(rows.length>0){
                 res.render('chitiet',{
                     error: false,
-                    baiviet: rows[0]  
+                    baiviet: rows[0],
                 });
             }
             else{
@@ -56,7 +57,7 @@ app.get('/chitiet/:id',(req,res)=>{
         console.log(err);
     }); 
 })
-
+app.use('/chuyenmuc', require('./routes/baiviettheochuyenmuc.route'));
 app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
 //app.use(require('./middlewares/locals.mdw'));
 
