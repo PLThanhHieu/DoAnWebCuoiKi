@@ -2,7 +2,7 @@ var express=require('express');
 var router=express.Router();
 var chuyenmucModel=require('../../models/chuyenmuc.model');
 router.get('/',(req,res)=>{
-    var p= chuyenmucModel.all();
+    var p= chuyenmucModel.allChuyenMucCap2();
     p.then(rows=>{
             console.log(rows);
             res.render('Admin/vwchuyenmuc/index',{

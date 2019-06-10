@@ -18,26 +18,21 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
+     {{#each lcchuyenmuc2s}}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{TenChuyenMucCap2}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {{#each ../lcchuyenmuc1s}}
+            {{#ifeq IdCap2 ../IdChuyenMucCap2}}
+              <a class="dropdown-item" href="#">{{TenChuyenMucCap1}}</a>
+            {{/ifeq}}
+          {{/each}}
+          </div>
+        </li>
+     {{/each}}
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -45,29 +40,11 @@
     </form>
   </div>
 </nav>
-<div class="container- fluid mt-4">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card showdow">
-                <h4 class="card-header">
-                    Chuyên mục
-                </h4>
-                <div class="list-group list-group-flush">
-                  {{#each lcchuyenmucs}}
-                  <a href="#" class="list-group-item list-group-item-action active">{{TenChuyenMuc}}</a>
-                  {{/each}}
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            {{{body}}}
-        </div>
-    </div>
-</div>
+
+{{{body}}}
 
 
 
-    
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

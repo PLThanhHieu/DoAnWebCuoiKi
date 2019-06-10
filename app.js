@@ -17,10 +17,13 @@ app.engine('hbs',exphbs({
 }));
 app.set('view engine','hbs');
 
+app.use(require('./middlewares/chuyenmuccap2'));
+app.use(require('./middlewares/chuyenmuccap1'));
+
 app.get('/',(req,res)=>{
     var p=baivietModel.loadAllbaiviet();
     p.then(rows=>{
-        console.log(rows);
+        //console.log(rows);
         res.render('home',{
             baiviets: rows
         });
@@ -41,6 +44,9 @@ app.get('/chitiet/:id',(req,res)=>{
     }
     baivietModel.chitietbaiviet(id).then(rows=>{
             if(rows.length>0){
+                //console.log(res.locals.chuyenmuc);
+                //console.log(res.locals.lcchuyenmuc1s);
+
                 res.render('chitiet',{
                     error: false,
                     baiviet: rows[0],
@@ -59,7 +65,7 @@ app.get('/chitiet/:id',(req,res)=>{
 })
 app.use('/chuyenmuc', require('./routes/baiviettheochuyenmuc.route'));
 app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
-//app.use(require('./middlewares/locals.mdw'));
+
 
 
 app.listen(3000,()=>{

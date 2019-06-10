@@ -1,7 +1,7 @@
 var chuyenmucModel=require('../models/chuyenmuc.model');
 module.exports=(req,res,next)=>{
-    chuyenmucModel.all().then(rows=>{
-        res.locals.lcchuyenmucs=rows;
+    chuyenmucModel.allChuyenMucCap1Ver2().then(rows=>{
+        res.locals.lcchuyenmuc1s=rows;
         next();
-    })
+    })  
 }

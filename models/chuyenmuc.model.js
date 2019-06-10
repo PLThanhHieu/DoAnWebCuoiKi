@@ -1,9 +1,16 @@
 var db=require('../utils/db');
 
 module.exports={
-    all:()=>{
+    allChuyenMucCap2:()=>{
         return db.load('select * from chuyenmuccap2');
-    }, 
+    },
+    allChuyenMucCap1:()=>{
+        return db.load('select * from chuyenmuccap1');
+    },
+    
+    allChuyenMucCap1Ver2:()=>{
+        return db.load('SELECT c.IdChuyenMucCap1, c.TenChuyenMucCap1, c.IdChuyenMucCap2 as IdCap2 FROM chuyenmuccap1 c');
+    },
     addChuyenmuc:entity=>{
         return db.addChuyenmuc('chuyenmuccap2', entity);
     },
