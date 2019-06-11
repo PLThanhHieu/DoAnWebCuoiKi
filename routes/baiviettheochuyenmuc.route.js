@@ -1,18 +1,42 @@
 var express=require('express');
 var router=express.Router();
 var baivietModel=require('../models/baiviet.model');
-router.get('/:id/baiviets',(req,res)=>{
+router.get('/:id/baiviets',(req,res, next)=>{
     var id=req.params.id;
-    var p= baivietModel.allbaiviettheochuyenmuc(id);
-    p.then(rows=>{
-            console.log(rows);
-            res.render('vwbaiviet/bychuyenmuc',{
-                baiviets: rows
-            });
+
+    var page=req.query.page || 1;
+    if(page<1) page=1;
+    
+    var limit = 6;
+    var offset =(page-1)*limit; 
+    Promise.all([
+       baivietModel.pagebaiviettheochuyenmuc(id,limit,offset),
+       baivietModel.countbaiviettheochuyenmuc(id)
+    ]).then(([rows, count_rows])=>{ 
+        var total =count_rows[0].total;
+        var nPage=Math.floor(total/limit);
+        if(total%limit>0) nPage++;
+        var pages=[];
+        for(i=1;i<=nPage;i++)
+        {
+            var obj={values: i, active: i === +page};
+            pages.push(obj);
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+        res.render('vwbaiviet/bychuyenmuc',{
+            baiviets: rows,
+            pages
+        });
+    }).catch(next);
+    // var p= baivietModel.allbaiviettheochuyenmuc(id);
+    // p.then(rows=>{
+    //         console.log(rows);
+    //         res.render('vwbaiviet/bychuyenmuc',{
+    //             baiviets: rows
+    //         });
+    //     }
+    // ).catch(err=>{
+    //     console.log(err);
+    // }); 
 })
 
 

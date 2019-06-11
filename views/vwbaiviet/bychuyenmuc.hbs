@@ -24,6 +24,22 @@
                 </div>
             {{/each}}
         </div>
-
+        <div class="row">
+            <div class="col-sm-12">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        {{#each this.pages}}  
+                            {{#if active}}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="javascript:;">{{values}}<span class="sr-only">(current)</span></a>
+                                </li>
+                            {{else}}
+                                 <li class="page-item"><a class="page-link" href="?page={{values}}">{{values}}</a></li>
+                            {{/if}}
+                        {{/each}}
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
 </div>
