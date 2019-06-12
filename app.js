@@ -3,6 +3,7 @@ var exphbs= require('express-handlebars');
 var morgan=require('morgan');
 
 
+
 var app=express();
 
 app.use(morgan('dev'));
@@ -82,7 +83,7 @@ app.get('/chitiet/:id',(req,res)=>{
 })
 app.use('/chuyenmuc', require('./routes/baiviettheochuyenmuc.route'));
 app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
-
+app.use('/Account', require('./routes/account.route'));
 app.use((req,res,next)=>{
     res.render('404',{layout :false});
 })
