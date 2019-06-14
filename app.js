@@ -1,25 +1,25 @@
 var express= require('express');
-var exphbs= require('express-handlebars');
+
 var morgan=require('morgan');
-
-
-
 var app=express();
+require('./middlewares/view-engine')(app);
+require('./middlewares/session')(app);
+require('./middlewares/passport')(app);
+
+
 
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(express.static('public'));
 
 var baivietModel=require('./models/baiviet.model');
-app.engine('hbs',exphbs({
-     defaultLayout: 'main.hbs',
-     layoutsDir: 'views/_layouts',
-     helpers: require('./helpers')
-}));
-app.set('view engine','hbs');
+
+
 
 app.use(require('./middlewares/chuyenmuccap2'));
 app.use(require('./middlewares/chuyenmuccap1'));
+app.use(require('./middlewares/auth-locals.mdw'));
 
 
 app.get('/',(req,res)=>{  

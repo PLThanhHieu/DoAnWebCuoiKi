@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Báo Điện Tử</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body,
+    html {
+      height: 100%;
+    }
+
+    .has-search .form-control {
+      padding-left: 2.375rem;
+    }
+
+    .has-search .form-control-feedback {
+      position: absolute;
+      z-index: 2;
+      display: block;
+      width: 2.375rem;
+      height: 2.375rem;
+      line-height: 2.375rem;
+      text-align: center;
+      pointer-events: none;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center align-items-center h-100" >
+            <div class="col-sm-4 col-md-3" >
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tài khoản</label>
+                        <input type="text" class="form-control" id="txtusername" aria-describedby="err"
+                            placeholder="Tài khoản" name="username">
+                            {{#if err_message}}
+                                <small id="err" class="form-text text-danger">{{err_message}}</small>
+                            {{/if }}
+                    </div>
+                    <div class="form-group">
+                        <label for="txtpassword">Mật khẩu</label>
+                        <input type="password" class="form-control" id="txtpassword" placeholder="Mật khẩu" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-success  btn-block">Đăng nhập</button>
+                    <a class="btn btn-danger btn-block" href="/" role="button">
+                        Hủy
+                    </a>
+                    <a class="btn btn-primary btn-block" href="/Account/register" role="button">
+                        Đăng kí
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

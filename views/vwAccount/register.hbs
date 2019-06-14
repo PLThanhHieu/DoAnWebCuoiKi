@@ -9,7 +9,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script>
         $(function() {
-            $('#txtDOB').datetimepicker();
+            $('#txtDOB').datetimepicker({
+                format: 'd/m/Y',
+                timepicker: false,
+                mask: true,
+            });
         })
     </script>
     <script>
@@ -19,7 +23,10 @@
                 rules:{
                     username:{
                         required: true,
-                        minlength:6
+                        minlength:6,
+                        remote:{
+                            url:'/Account/is-available'
+                        }
                     },
                     password:{
                         required: true,
@@ -35,6 +42,9 @@
                     email:{
                         required: true,
                         email: true,
+                        remote:{
+                            url:'/Account/is-available-email'
+                        }
                     },
                     dob:{
                         required: true,
@@ -42,7 +52,8 @@
                 },
                 messages:{
                     username:{
-                        required: 'Không để trống tài khoản!'
+                        required: 'Không để trống tài khoản!',
+                        remote: 'Tên tài khoản đã tồn tại!'
                     },
                     password:{
                         required: 'Không để trống mật khẩu!'
@@ -57,6 +68,7 @@
                     email:{
                         required: 'Không để trống email!',
                         email: 'Vui lòng điền đúng định dạng email!',
+                        remote: 'Email đã được sử dụng!'
                     },
                     dob:{
                         required: 'Không để trống ngày sinh!',
@@ -120,10 +132,10 @@
                             <i class="fa fa-check" aria-hidden="true"></i>
                            Đăng kí
                         </button>
-                        <a class="btn btn-lg btn-primary btn-block" href="/" role="button">
-                            <i class="fa fa-backward" aria-hidden="true"></i>
-                            Hủy
-                        </a>
+                            <a class="btn btn-lg btn-primary btn-block" href="/" role="button">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                Hủy
+                            </a>
                     </div>
                 </div>
             </form>
