@@ -12,16 +12,16 @@ module.exports={
         return db.load('SELECT c.IdChuyenMucCap1, c.TenChuyenMucCap1, c.IdChuyenMucCap2 as IdCap2 FROM chuyenmuccap1 c');
     },
     addChuyenmuc:entity=>{
-        return db.addChuyenmuc('chuyenmuccap2', entity);
+        return db.add('chuyenmuccap2', entity);
     },
     single:id=>{
         return db.load(`select * from chuyenmuccap2 where IdChuyenMucCap2 =${id}`);
     },
     updateChuyenmuc:entity=>{
-        return db.updateChuyenmuc('chuyenmuccap2','IdChuyenMucCap2', entity);
+        return db.update('chuyenmuccap2','IdChuyenMucCap2', entity);
     },
     deleteChuyenmuc:id=>{
-        return db.deleteChuyenmuc('chuyenmuccap2','IdChuyenMucCap2', id);
+        return db.delete('chuyenmuccap2','IdChuyenMucCap2', id);
     }
 
 };

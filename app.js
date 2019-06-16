@@ -60,11 +60,8 @@ app.get('/chitiet/:id',(req,res)=>{
             error: true,  
         });
     }
-    baivietModel.chitietbaiviet(id).then(rows=>{
+    baivietModel.single(id).then(rows=>{
             if(rows.length>0){
-                //console.log(res.locals.chuyenmuc);
-                //console.log(res.locals.lcchuyenmuc1s);
-
                 res.render('chitiet',{
                     error: false,
                     baiviet: rows[0],

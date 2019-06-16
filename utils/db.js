@@ -40,7 +40,7 @@ module.exports={
             });
         });
     }, 
-    addChuyenmuc:(tableName, entity)=>{
+    add:(tableName, entity)=>{
         return new Promise((resolve, reject)=>{
             var sql=`insert into ${tableName} set ?`;
             var connection=createConnection();
@@ -56,7 +56,7 @@ module.exports={
         });
     },
 
-    updateChuyenmuc:(tableName,idFields, entity)=>{
+    update:(tableName,idFields, entity)=>{
         return new Promise((resolve, reject)=>{
             var sql=`update ${tableName} set ? where ${idFields}=?`;
             var id=entity[idFields];
@@ -74,7 +74,7 @@ module.exports={
         });
     },
 
-    deleteChuyenmuc:(tableName,idFields, id)=>{
+    delete:(tableName,idFields, id)=>{
         return new Promise((resolve, reject)=>{
             var sql=`delete from ${tableName} where ${idFields}=?`;
             var connection=createConnection();

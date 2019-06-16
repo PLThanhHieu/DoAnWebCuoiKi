@@ -48,7 +48,7 @@ router.get('/:id/baiviets/chitiet/:idbaiviet',(req,res)=>{
             error: true,  
         });
     }
-    baivietModel.chitietbaiviet(idbaiviet).then(rows=>{
+    baivietModel.single(idbaiviet).then(rows=>{
             if(rows.length>0){
                 res.render('../views/chitiet',{
                     error: false,

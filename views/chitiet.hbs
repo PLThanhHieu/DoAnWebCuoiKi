@@ -5,20 +5,18 @@
                 Không tồn tại bài viết <a href="/" class="alert-link">Trờ lại</a>
             </div>
         {{else}}
-            <div class="col-sm-4"> 
-                <div class="card h-75">
+            
+                
                     <div class="card-header">
                         {{this.baiviet.TieuDe}}
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{this.baiviet.TomTat}}</h5>
-                        <p class="card-text">{{this.baiviet.NoiDungBaiViet}}</p>
+                        <h5 class="card-title">{{{this.baiviet.TomTat}}}</h5>
+                        <p class="card-text">{{{this.baiviet.NoiDungBaiViet}}}</p>
                         <p class="card-text">Chuyên mục: {{this.baiviet.ChuyenMuc}}</p>
                         <p class="card-text">Ngày đăng: {{this.baiviet.NgayDang}}</p>
                         <p class="card-text"> Lượt xem : {{this.baiviet.LuotXem}}</p>
                     </div>
-                </div>
-                </div>
         {{/if}}
     </div>
 </div>

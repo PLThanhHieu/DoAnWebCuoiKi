@@ -46,13 +46,13 @@
 
 <div class="shadow" >
     <h4 class="card-header" >
-        Bài viết mới
+        Chỉnh sữa bài viết
     </h4>
     <div class="card-body">
-        <form method="POST">
+        <form method="POST" action="/Writer/update">
             <div class="form-group">
                 <label>Tiêu đề:</label>
-                <input type="text" id="txtTieuDe" name="TieuDe">
+                <input type="text" id="txtTieuDe" name="TieuDe" value="{{{this.baiviet.TieuDe}}}">
             </div>
             <div class="form-group">
                 <label>Chuyên mục:</label>
@@ -71,15 +71,15 @@
             </div>
             <div class="form-group">
                 <label>Ảnh đại diện:</label>
-                <textarea type="textarea" class="form-control" id="txtAnhDaiDien" name="AnhDaiDien"></textarea>
+                <textarea type="textarea" class="form-control" id="txtAnhDaiDien" name="AnhDaiDien">{{{this.baiviet.AnhDaiDien}}}</textarea>
             </div>
             <div class="form-group">
                 <label>Tóm tắt nội dung:</label>
-                <textarea type="textarea" class="form-control" id="txtTomTat" name="TomTat"></textarea>
+                <textarea type="textarea" class="form-control" id="txtTomTat" name="TomTat">{{{this.baiviet.TomTat}}}</textarea>
             </div>
             <div class="form-group">
                 <label>Nội dung bào viết:</label>
-                <textarea type="textarea" class="form-control" id="txtBaiVietMoi" name="NoiDungBaiViet"></textarea>
+                <textarea type="textarea" class="form-control" id="txtBaiVietMoi" name="NoiDungBaiViet">{{{this.baiviet.NoiDungBaiViet}}}</textarea>
             </div>
             <a class="btn btn-primary" href="/Writer" role="button">
                 <i class="fa fa-backward" aria-hidden="true"></i>

@@ -1,7 +1,9 @@
 var db=require('../utils/db');
 
 module.exports={
- 
+    loadbaivietByIDWriter:IdNguoiDung=>{
+        return db.loadbaiviet(`select *from baiviet where IdNguoiDung = ${IdNguoiDung}`);
+    },
     loadAllbaiviet:()=>{
         return db.loadbaiviet('select *from baiviet');
     },
@@ -11,11 +13,11 @@ module.exports={
     CountAllbaiviet:()=>{
         return db.loadbaiviet('select count(*) as total from baiviet');
     },
-    chitietbaiviet: IdChuyenMucCap1=>{
-        return db.load(`select * from baiviet where IdChuyenMucCap1 =${IdChuyenMucCap1}`);
-    },
+    // chitietbaiviet: IdChuyenMucCap1=>{
+    //     return db.load(`select * from baiviet where IdChuyenMucCap1 =${IdChuyenMucCap1}`);
+    // },
     addBaiViet:entity=>{
-        return db.addChuyenmuc('baiviet', entity);
+        return db.add('baiviet', entity);
     },
 
     allbaiviettheochuyenmuc:id=>{
@@ -31,10 +33,10 @@ module.exports={
         return db.load(`select * from baiviet where IdBaiViet =${id}`);
     },
     updateBaiViet:entity=>{
-        return db.updateChuyenmuc('baiviet','IdBaiViet', entity);
+        return db.update('baiviet','IdBaiViet', entity);
     },
     deleteBaiViet:id=>{
-        return db.deleteChuyenmuc('baiviet','IdBaiViet', id);
+        return db.delete('baiviet','IdBaiViet', id);
     }
 
 };
