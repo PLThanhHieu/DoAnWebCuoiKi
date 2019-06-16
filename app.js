@@ -5,7 +5,7 @@ var app=express();
 require('./middlewares/view-engine')(app);
 require('./middlewares/session')(app);
 require('./middlewares/passport')(app);
-
+require('./middlewares/upload')(app);
 
 
 app.use(morgan('dev'));
@@ -84,6 +84,7 @@ app.get('/chitiet/:id',(req,res)=>{
 app.use('/chuyenmuc', require('./routes/baiviettheochuyenmuc.route'));
 app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
 app.use('/Account', require('./routes/account.route'));
+app.use('/Writer',require('./routes/Writer/writer.route'));
 app.use((req,res,next)=>{
     res.render('404',{layout :false});
 })
