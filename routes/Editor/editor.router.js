@@ -4,57 +4,19 @@ var auth=require('../../middlewares/auth');
 var CMC1=require('../../models/chuyenmuc.model');
 var router=express.Router();
  
-router.get('/post',(req,res,next)=>{
-    res.render('vwWriter/writer-post');
-})
-
-router.post('/post',auth,(req,res,next)=>{
-    
-    var today=new Date();
-    var entity={
-        TieuDe: req.body.TieuDe,
-        AnhDaiDien: req.body.AnhDaiDien,
-        TomTat: req.body.TomTat,
-        NoiDungBaiViet:req.body.NoiDungBaiViet,
-        TrangThai: 'Chờ duyệt',
-        ChuThich: 'Không chú thích',
-        NgayDang: today,
-        IdChuyenMucCap1: req.body.IdChuyenMucCap1,
-        LuotXem: 1,
-        IdNguoiDung: req.user.IdNguoiDung,
-        LoaiBaiViet:req.body.LoaiBaiViet
-    }
-    baivietModel.addBaiViet(entity).then(()=>{
-        res.render('/vwWriter/writer-home');
-    }).catch(next)
-})
-
-router.get('/upload',(req,res,next)=>{
-    res.render('vwWriter/writer-upload');
-})
 
 router.get('/',auth,(req,res,next)=>{
-    var IdNguoiDung = req.user.IdNguoiDung;
-    baivietModel.loadbaivietByIDWriter(IdNguoiDung).then(rows=>{
-        var xuatban = new Array();
-        var tuchoi= new Array();
+    var chuyenmucduocphancong = req.user.ChuyenMucDuocPhanCong;
+    baivietModel.loadbaivietByIDEditor(chuyenmucduocphancong).then(rows=>{
         var choduyet= new Array();
         for(i=0;i<rows.length;i++)
         {
-            if(rows[i].TrangThai==='Xuất bản'){
-                xuatban.push(rows[i]);
-            }
-            if(rows[i].TrangThai==='Từ chối'){
-                tuchoi.push(rows[i]);
-            }
             if(rows[i].TrangThai==='Chờ duyệt'){
                 choduyet.push(rows[i]);
             }
         }
-        res.render('vwWriter/writer-home',{
-            tuchoi,
-            choduyet,
-            xuatban
+        res.render('vwEditor/edit-home',{
+            choduyet
         })
     }).catch(next)
     
@@ -87,24 +49,23 @@ router.get('/chitiet/:idbaiviet',(req,res)=>{
     }); 
 })
 
-
-router.get('/update/:id',(req,res)=>{
+router.get('/duyetbai/:id',(req,res)=>{
     var id=req.params.id;
     if(isNaN(id))
     {
-        res.render('vwWriter/update',{
+        res.render('vwEditor/edit-duyetbai',{
             error: true,  
         });
     }
     baivietModel.single(id).then(rows=>{
             if(rows.length>0){
-                res.render('vwWriter/update',{
+                res.render('vwEditor/edit-duyetbai',{
                     error: false,
                     baiviet: rows[0]  
                 });
             }
             else{
-                res.render('vwWriter/update',{
+                res.render('vwEditor/edit-duyetbai',{
                     error: true,
                 });
             }
@@ -114,14 +75,40 @@ router.get('/update/:id',(req,res)=>{
     }); 
 })
 
-router.post('/update',(req,res,next)=>{
+router.post('/duyetbai',(req,res,next)=>{
     var baiviet=req.body;
-    baiviet.TrangThai='Chờ duyệt';
+    baiviet.TrangThai='Xuất bản';
+    if(baiviet.ChuThich==='')
+    {
+        delete baiviet.ChuThich;
+    }
+    if(baiviet.Ngaydang==='__/__/____')
+    {
+        delete baiviet.NgayDang;
+    }
     baivietModel.updateBaiViet(baiviet)
         .then(n=>{
-            console.log(n)
-            res.redirect('/Writer');
+            console.log(baiviet)
+            res.redirect('/Editor');
         })
-        .catch(next)  
+        .catch(next) ;
+})
+
+router.post('/tuchoi',(req,res,next)=>{
+    var baiviet=req.body;
+    baiviet.TrangThai='Từ chối';
+    if(baiviet.ChuThich==='')
+    {
+        delete baiviet.ChuThich;
+    }
+    if(baiviet.Ngaydang==='__/__/____')
+    {
+        delete baiviet.NgayDang;
+    }
+    baivietModel.updateBaiViet(baiviet)
+        .then(n=>{
+            res.redirect('/Editor');
+        })
+        .catch(next) ;
 })
 module.exports=router;

@@ -37,6 +37,10 @@ module.exports={
     },
     deleteBaiViet:id=>{
         return db.delete('baiviet','IdBaiViet', id);
-    }
+    },
+
+    loadbaivietByIDEditor:IdChuyenMuc=>{
+        return db.loadbaiviet(`SELECT * from baiviet b LEFT JOIN chuyenmuccap1 c1 on b.IdChuyenMucCap1=c1.IdChuyenMucCap1 LEFT JOIN chuyenmuccap2 c2 on c1.IdChuyenMucCap2=c2.IdChuyenMucCap2 where c2.IdChuyenMucCap2= ${IdChuyenMuc}`);
+    },
 
 };

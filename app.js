@@ -82,6 +82,7 @@ app.use('/chuyenmuc', require('./routes/baiviettheochuyenmuc.route'));
 app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
 app.use('/Account', require('./routes/account.route'));
 app.use('/Writer',require('./routes/Writer/writer.route'));
+app.use('/Editor',require('./routes/Editor/editor.router'));
 app.use((req,res,next)=>{
     res.render('404',{layout :false});
 })

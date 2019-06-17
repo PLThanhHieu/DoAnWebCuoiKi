@@ -50,6 +50,10 @@
     </h4>
     <div class="card-body">
         <form method="POST" action="/Writer/update">
+        <div class="form-group">
+                <label>ID Bài viết</label>
+                <input readonly type="text" id="txtId" name="IdBaiViet" value="{{this.baiviet.IdBaiViet}}">
+            </div>
             <div class="form-group">
                 <label>Tiêu đề:</label>
                 <input type="text" id="txtTieuDe" name="TieuDe" value="{{{this.baiviet.TieuDe}}}">

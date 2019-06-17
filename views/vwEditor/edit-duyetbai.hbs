@@ -1,0 +1,70 @@
+{{#section 'css'}}
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{{/section}}
+
+{{#section 'js'}}
+    <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $(function() {
+            $('#txtXuatBan').datetimepicker({
+                format: 'd/m/Y',
+                timepicker: false,
+                mask: true,
+            });
+        })
+    </script>
+{{/section}}
+
+<form method="POST" action="/Editor/duyetbai">
+
+<div class="card showdow">
+    <h4 class="card-header">
+        Danh sách bài viết Chờ duyệt
+    </h4>
+    <div class="form-group">
+      <label for="txtId">ID Bài Viết</label>
+      <input readonly type="text" class="form-control" id="txtId" name="IdBaiViet" value="{{this.baiviet.IdBaiViet}}">
+    </div>
+    <div class="form-group">
+      <label for="txtId">Trạng thái</label>
+      <input readonly type="text" class="form-control" id="txtTrangThai" name="TrangThai" value="{{this.baiviet.TrangThai}}">
+    </div>
+    
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Tiểu đề bài viết</th>
+      <th scope="col"> Loại bài  viết</th>
+    </tr>
+  </thead>
+  <tbody>
+        <tr>
+          <td>
+              <a href="/chitiet/{{this.baiviet.IdBaiViet}}">{{this.baiviet.TieuDe}}</a>
+          </td>
+          <td>{{this.baiviet.LoaiBaiViet}}</td>
+        </tr>
+  </tbody>
+</table>
+<div class="form-group">
+  <label for="txtXuatBan">Ngày Xuất Bản</label>
+  <input type="text" class="form-control" id="txtXuatBan" name="NgayDang">
+  <button type="submit" class="btn btn-success mt-3">
+    <i class="fa fa-check" aria-hidden="true"></i>
+    Duyệt bài
+  </button>
+</div>
+<div class="form-group">
+  <label for="txtchuthich">Chú thích</label>
+  <input type="text" class="form-control" id="txtchuthich" name="ChuThich">
+  <button type="submit" class="btn btn-outline-danger mt-3" formaction="/Editor/tuchoi">
+    <i class="fa fa-check" aria-hidden="true"></i>
+    Từ chối
+  </button>
+</div>
+
+
+
+</form>
