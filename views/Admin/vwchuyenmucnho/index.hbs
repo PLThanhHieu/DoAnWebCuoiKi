@@ -1,0 +1,33 @@
+<div class="card showdow">
+    <h4 class="card-header">
+        Danh Sach Chuyen Muc Bai Viet
+    </h4>
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Tên chuyên mục</th>
+      <th scope="col">Thuộc</th>
+      <th scope="col" class="text-right">
+        <a class="btn btn-outline-success" href="/Admin/chuyenmucnho/add" role="button">
+          <i class="fa fa-plus" aria-hidden="true"> Thêm chuyên mục</i>
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.chuyenmuccap1}}
+        <tr>
+          <th scope="row">{{IdChuyenMucCap1}}</th>
+          <td>{{TenChuyenMucCap1}}</td>
+          <td>{{TenChuyenMucCap2}}</td>
+          <td class="text-right">
+            <a class="btn btn-primary btn-sm" href="/Admin/chuyenmucnho/edit/{{IdChuyenMucCap1}}" role="button">
+              <i class="fa fa-pencil" aria-hidden="true"> </i>
+            </a>
+          </td>
+        </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

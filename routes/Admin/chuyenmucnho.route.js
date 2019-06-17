@@ -2,11 +2,11 @@ var express=require('express');
 var router=express.Router();
 var chuyenmucModel=require('../../models/chuyenmuc.model');
 router.get('/',(req,res)=>{
-    var p= chuyenmucModel.allChuyenMucCap2();
+    var p= chuyenmucModel.allChuyenMucCap1Cap2();
     p.then(rows=>{
             console.log(rows);
-            res.render('Admin/vwchuyenmuc/index',{
-                chuyenmucbaiviet: rows
+            res.render('Admin/vwchuyenmucnho/index',{
+                chuyenmuccap1: rows
             });
         }
     ).catch(err=>{
@@ -15,14 +15,11 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/add',(req,res)=>{
-    res.render('Admin/vwchuyenmuc/add');
+    res.render('Admin/vwchuyenmucnho/add');
 })
 
 router.post('/add',(req,res)=>{
-    var entity={
-        TenChuyenMuc: req.body.TenChuyenMuc
-    }
-    chuyenmucModel.addChuyenmuc(entity)
+    chuyenmucModel.addChuyenmuccap1(req.body)
         .then(id=>{
             console.log(id)
             res.render('Admin/vwchuyenmuc/add');
@@ -37,19 +34,19 @@ router.get('/edit/:id',(req,res)=>{
     var id=req.params.id;
     if(isNaN(id))
     {
-        res.render('Admin/vwchuyenmuc/edit',{
+        res.render('Admin/vwchuyenmucnho/edit',{
             error: true,  
         });
     }
-    chuyenmucModel.single(id).then(rows=>{
+    chuyenmucModel.singlecap1(id).then(rows=>{
             if(rows.length>0){
-                res.render('Admin/vwchuyenmuc/edit',{
+                res.render('Admin/vwchuyenmucnho/edit',{
                     error: false,
-                    chuyenmuc: rows[0]  
+                    chuyenmuccap1: rows[0]  
                 });
             }
             else{
-                res.render('Admin/vwchuyenmuc/edit',{
+                res.render('Admin/vwchuyenmucnho/edit',{
                     error: true,
                      
                 });
@@ -62,10 +59,10 @@ router.get('/edit/:id',(req,res)=>{
 
 router.post('/update',(req,res)=>{
     
-    chuyenmucModel.updateChuyenmuc(req.body)
+    chuyenmucModel.updateChuyenmuccap1(req.body)
         .then(n=>{
             console.log(n)
-            res.redirect('/Admin/chuyenmuc');
+            res.redirect('/Admin/chuyenmucnho');
         })
         .catch(err=>{
             console.log(err);
@@ -74,10 +71,10 @@ router.post('/update',(req,res)=>{
 
 router.post('/delete',(req,res)=>{
     
-    chuyenmucModel.deleteChuyenmuc(req.body.IdChuyenMucCap2)
+    chuyenmucModel.deleteChuyenmuccap1(req.body.IdChuyenMucCap1)
         .then(n=>{
             console.log(n)
-            res.redirect('/Admin/chuyenmuc');
+            res.redirect('/Admin/chuyenmucnho');
         })
         .catch(err=>{
             console.log(err);

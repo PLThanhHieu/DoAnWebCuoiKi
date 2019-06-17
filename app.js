@@ -83,6 +83,7 @@ app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
 app.use('/Account', require('./routes/account.route'));
 app.use('/Writer',require('./routes/Writer/writer.route'));
 app.use('/Editor',require('./routes/Editor/editor.router'));
+app.use('/Admin/chuyenmucnho',require('./routes/Admin/chuyenmucnho.route'));
 app.use((req,res,next)=>{
     res.render('404',{layout :false});
 })
