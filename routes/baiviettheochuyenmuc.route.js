@@ -49,20 +49,30 @@ router.get('/:id/baiviets/chitiet/:idbaiviet',(req,res)=>{
         });
     }
     baivietModel.single(idbaiviet).then(rows=>{
-            if(rows.length>0){
+        if(rows.length>0){
+            var luotxem=rows[0].LuotXem;
+            luotxem=luotxem+1;
+            rows[0].LuotXem=luotxem;
+            var entity ={
+                IdBaiViet: idbaiviet,
+                LuotXem: rows[0].LuotXem
+            }
+
+            baivietModel.updateBaiViet(entity).then(()=>{
                 res.render('../views/chitiet',{
                     error: false,
                     baiviet: rows[0],
                 });
-            }
-            else{
-                res.render('../views/chitiet',{
-                    error: true,
-                     
-                });
-            }
+            })
+            
         }
-    ).catch(err=>{
+        else{
+            res.render('../views/chitiet',{
+                error: true,
+                 
+            });
+        }
+    }).catch(err=>{
         console.log(err);
     }); 
 })

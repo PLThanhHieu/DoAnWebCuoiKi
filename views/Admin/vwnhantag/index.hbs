@@ -1,30 +1,37 @@
+{{#ifeq authUser.PhanLoaiNguoiDung 'Admin'}}
 <div class="card showdow">
-    <h4 class="card-header">
-        Danh Sach Tag
-    </h4>
-    <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">IDTag</th>
-      <th scope="col">Ten Tag</th>
-      <th scope="col">Bài viết</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each this.nhantags}}
-        <tr>
-          <th scope="row">{{IdTag}}</th>
-          <td>{{TenTag}}</td>
-          <td>
-            <a href="/chitiet/{{IdBaiViet}}">{{TieuDe}}</a>
-          </td>
-          <td class="text-right">
-            <a class="btn btn-primary btn-sm" href="/Admin/nhantag/edit/{{IdTag}}" role="button">
-              <i class="fa fa-pencil" aria-hidden="true"> </i>
-            </a>
-          </td>
-        </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <h4 class="card-header">
+    Danh Sach Tag
+  </h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">IDTag</th>
+        <th scope="col">Ten Tag</th>
+        <th scope="col">Bài viết</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this.nhantags}}
+      <tr>
+        <th scope="row">{{IdTag}}</th>
+        <td>{{TenTag}}</td>
+        <td>
+          <a href="/chitiet/{{IdBaiViet}}">{{TieuDe}}</a>
+        </td>
+        <td class="text-right">
+          <a class="btn btn-primary btn-sm" href="/Admin/nhantag/edit/{{IdTag}}" role="button">
+            <i class="fa fa-pencil" aria-hidden="true"> </i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>
+
+{{else}}
+<div class="alert alert-danger" role="alert">
+  Không có quyền truy bập <a href="/" class="alert-link">Trờ lại</a>
+</div>
+{{/ifeq}}

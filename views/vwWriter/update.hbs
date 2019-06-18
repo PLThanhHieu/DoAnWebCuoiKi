@@ -30,7 +30,7 @@
         $(function() {
             tinymce.init({
                 selector:'#txtTomTat',
-                height: 400,
+                height: 150,
                 menubar: false,
                 plugins: 'paste image link autolink lists table media',
                 toolbar: [
@@ -44,6 +44,8 @@
 {{/section}}
 
 
+
+{{#ifeq authUser.PhanLoaiNguoiDung 'Writer'}}
 <div class="shadow" >
     <h4 class="card-header" >
         Chỉnh sữa bài viết
@@ -101,3 +103,9 @@
     </div>
 </div>
 
+
+{{else}}
+<div class="alert alert-danger" role="alert">
+  Không có quyền truy bập <a href="/" class="alert-link">Trờ lại</a>
+</div>
+{{/ifeq}}

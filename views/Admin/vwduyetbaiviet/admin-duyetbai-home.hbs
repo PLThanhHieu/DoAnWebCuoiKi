@@ -1,34 +1,40 @@
-
+{{#ifeq authUser.PhanLoaiNguoiDung 'Admin'}}
 <div class="card showdow">
-    <h4 class="card-header">
-        Danh sách bài viết Chờ duyệt
-    </h4>
-    <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">ID Bài viết</th>
-      <th scope="col">Tiểu đề bài viết</th>
-      <th scope="col">Trạng thái</th>
-      <th scope="col"> Loại bài  viết</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each choduyet}}
-        <tr>
-          <th scope="row">{{IdBaiViet}}</th>
-          <td>
-              <a href="/chitiet/{{IdBaiViet}}">{{TieuDe}}</a>
-          </td>
-          <td>{{TrangThai}}</td>
-          <td>{{LoaiBaiViet}}</td>
-          <td class="text-right">
-            <a class="btn btn-primary btn-sm" href="/Admin/duyetbai/duyetbai/{{IdBaiViet}}" role="button">
-              <i class="fa fa-pencil" aria-hidden="true"> </i>
-            </a>
-          </td>
-        </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <h4 class="card-header">
+    Danh sách bài viết Chờ duyệt
+  </h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID Bài viết</th>
+        <th scope="col">Tiểu đề bài viết</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col"> Loại bài viết</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each choduyet}}
+      <tr>
+        <th scope="row">{{IdBaiViet}}</th>
+        <td>
+          <a href="/chitiet/{{IdBaiViet}}">{{TieuDe}}</a>
+        </td>
+        <td>{{TrangThai}}</td>
+        <td>{{LoaiBaiViet}}</td>
+        <td class="text-right">
+          <a class="btn btn-primary btn-sm" href="/Admin/duyetbai/duyetbai/{{IdBaiViet}}" role="button">
+            <i class="fa fa-pencil" aria-hidden="true"> </i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>
 
+
+{{else}}
+<div class="alert alert-danger" role="alert">
+  Không có quyền truy bập <a href="/" class="alert-link">Trờ lại</a>
+</div>
+{{/ifeq}}

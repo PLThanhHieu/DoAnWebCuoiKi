@@ -22,7 +22,7 @@ router.get('/',auth,(req,res,next)=>{
     
 })
 
-router.get('/chitiet/:idbaiviet',(req,res)=>{ 
+router.get('/chitiet/:idbaiviet',auth,(req,res,next)=>{ 
     var idbaiviet=req.params.idbaiviet;
     if(isNaN(idbaiviet))
     {
@@ -44,12 +44,10 @@ router.get('/chitiet/:idbaiviet',(req,res)=>{
                 });
             }
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 
-router.get('/duyetbai/:id',(req,res)=>{
+router.get('/duyetbai/:id',auth,(req,res,next)=>{
     var id=req.params.id;
     if(isNaN(id))
     {
@@ -70,9 +68,7 @@ router.get('/duyetbai/:id',(req,res)=>{
                 });
             }
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 
 router.post('/duyetbai',(req,res,next)=>{
@@ -82,7 +78,7 @@ router.post('/duyetbai',(req,res,next)=>{
     {
         delete baiviet.ChuThich;
     }
-    if(baiviet.Ngaydang==='__/__/____')
+    if(baiviet.NgayDang==='__/__/____')
     {
         delete baiviet.NgayDang;
     }
@@ -101,7 +97,7 @@ router.post('/tuchoi',(req,res,next)=>{
     {
         delete baiviet.ChuThich;
     }
-    if(baiviet.Ngaydang==='__/__/____')
+    if(baiviet.NgayDang==='__/__/____')
     {
         delete baiviet.NgayDang;
     }

@@ -5,6 +5,7 @@ var moment=require('moment');
 var passport = require('passport');
 var userModel=require('../models/user.model');
 var auth=require('../middlewares/auth');
+var authUser=require('../middlewares/auth-locals.mdw');
 
 router.get('/register',(req,res,next)=>{
     res.render('vwAccount/register');
@@ -29,6 +30,9 @@ router.get('/is-available-email',(req,res,next)=>{
         return res.json(true);
     })
 })
+
+
+
 
 router.post('/register',(req,res,next)=>{
     //res.render('bwAccount/register');
@@ -73,7 +77,7 @@ router.post('/login',(req,res,next)=>{
 })
 
 router.get('/profile',auth,(req,res,next)=>{
-     res.end('............');
+     res.render('vwAccount/profile');
 })
 
 
@@ -82,4 +86,49 @@ router.post('/logout',auth,(req,res,next)=>{
     res.redirect('/Account/login');
 })
 
+router.get('/edit',auth,(req,res,next)=>{
+    res.render('vwAccount/edit');
+})
+
+router.post('/edit',auth,(req,res,next)=>{
+    var dob=moment(req.body.NgaySinh,'DD/MM/YYYY').format('YYYY/MM/DD');
+    var entity={
+        IdNguoiDung : req.body.IdNguoiDung,
+        Hoten: req.body.HoTen,
+        NgaySinh: dob,
+        Email: req.body.Email,
+    }
+    userModel.updateUser(entity).then(()=>{
+        res.redirect('/Account/profile')
+    }).catch(next);
+})
+
+router.get('/doimatkhau',auth,(req,res,next)=>{
+    res.render('vwAccount/doimatkhau');
+})
+
+
+router.get('/saimatkhaucu',(req,res,next)=>{
+        var pw=req.query.passcu;
+        var ret=bcrypt.compareSync(pw,req.user.MatKhau);
+        if(!ret){
+            return res.json(false);
+        }
+        console.log(ret);
+        return res.json(true);  
+        
+    
+})
+
+router.post('/doimatkhau',(req,res,next)=>{
+    var pw=req.body.passmoi;
+    var hash=bcrypt.hashSync(pw,10);
+    var entity={
+        IdNguoiDung:req.user.IdNguoiDung,
+        MatKhau: hash
+    }
+    userModel.updateUser(entity).then(()=>{
+        res.redirect('/Account/profile')
+    })
+})
 module.exports=router;

@@ -1,22 +1,54 @@
-<div class="shadow" >
+{{#section 'css'}}
+<link rel="stylesheet" href="../css/styleanh.css">
+{{/section}}
+
+<div class="shadow">
     <div class="card-body">
         {{#if this.error}}
-            <div class="alert alert-danger" role="alert">
-                Không tồn tại bài viết <a href="/" class="alert-link">Trờ lại</a>
-            </div>
+        <div class="alert alert-danger" role="alert">
+            Không tồn tại bài viết <a href="/" class="alert-link">Trờ lại</a>
+        </div>
         {{else}}
-            
-                
-                    <div class="card-header">
-                        {{this.baiviet.TieuDe}}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{{this.baiviet.TomTat}}}</h5>
-                        <p class="card-text">{{{this.baiviet.NoiDungBaiViet}}}</p>
-                        <p class="card-text">Chuyên mục: {{this.baiviet.ChuyenMuc}}</p>
-                        <p class="card-text">Ngày đăng: {{this.baiviet.NgayDang}}</p>
-                        <p class="card-text"> Lượt xem : {{this.baiviet.LuotXem}}</p>
-                    </div>
+        <div class="card-header">
+            {{this.baiviet.TieuDe}}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{{this.baiviet.TomTat}}}</h5>
+            <p class="card-text">{{{this.baiviet.NoiDungBaiViet}}}</p>
+            <p class="card-text"><strong> Ngày đăng: {{this.baiviet.NgayDang}}</strong></p>
+            <p class="card-text"> <strong> Lượt xem : {{this.baiviet.LuotXem}}</p></strong>
+        </div>
         {{/if}}
+    </div>
+</div>
+
+
+
+
+<div class="card shadow mt-3">
+    <h4 class="card-header"> Danh Sách bài viết liên quan</h4>
+    <div class="card-body">
+        <div class="row">
+            {{#each this.bailienquan}}
+            <div class="col-4">
+                <div class="contain">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="anh">
+                                {{{AnhDaiDien}}}
+                            </div>
+                            
+                            </div>
+                        <div class="col-6">
+                            <strong>
+                                {{{TomTat}}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{IdBaiViet}}">{{TieuDe}}</a>
+            </div>
+            {{/each}}
+        </div>
     </div>
 </div>

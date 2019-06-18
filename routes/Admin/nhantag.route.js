@@ -1,8 +1,8 @@
 var express=require('express');
 var router=express.Router();
 var nhantagModel=require('../../models/nhantag.model');
-
-router.get('/',(req,res,next)=>{
+var auth=require('../../middlewares/auth');
+router.get('/',auth,(req,res,next)=>{
     nhantagModel.allTagandBaiViet().then(rows=>{
         res.render('Admin/vwnhantag/index',{
             nhantags: rows
@@ -10,7 +10,7 @@ router.get('/',(req,res,next)=>{
     }).catch(next);
 })
 
-router.get('/edit/:id',(req,res)=>{
+router.get('/edit/:id',auth,(req,res,next)=>{
     var id=req.params.id;
     if(isNaN(id))
     {
@@ -32,12 +32,10 @@ router.get('/edit/:id',(req,res)=>{
                 });
             }
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 
-router.get('chitiet/:idbaiviet',(req,res)=>{ 
+router.get('chitiet/:idbaiviet',auth,(req,res,next)=>{ 
     var idbaiviet=req.params.idbaiviet;
     if(isNaN(idbaiviet))
     {
@@ -59,9 +57,7 @@ router.get('chitiet/:idbaiviet',(req,res)=>{
                 });
             }
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 
 router.post('/update',(req,res,next)=>{

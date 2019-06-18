@@ -1,14 +1,15 @@
-<div class="shadow" >
-    <h4 class="card-header" >
-        Chỉnh sữa chuyên mục
+{{#ifeq authUser.PhanLoaiNguoiDung 'Admin'}}
+<div class="shadow">
+    <h4 class="card-header">
+        Chỉnh sữa Tag
     </h4>
     <div class="card-body">
         {{#if this.error}}
-            <div class="alert alert-danger" role="alert">
-                Không tồn tại Tag <a href="/Admin/nhantag" class="alert-link">Trờ lại</a>
-            </div>
+        <div class="alert alert-danger" role="alert">
+            Không tồn tại Tag <a href="/Admin/nhantag" class="alert-link">Trờ lại</a>
+        </div>
         {{else}}
-            <form method="POST" action="/Admin/nhantag/update">
+        <form method="POST" action="/Admin/nhantag/update">
             <div class="form-group">
                 <label for="txtIdTag">ID</label>
                 <input readonly type="text" class="form-control" id="txtIdtag" name="IdTag"
@@ -16,8 +17,8 @@
             </div>
             <div class="form-group">
                 <label for="txtChuyenMuc">Tên Tag</label>
-                <input type="text" class="form-control" id="txtTag" name="TenTag"
-                    placeholder="Tên chuyên mục mới" autofocus value="{{this.nhantag.TenTag}}">
+                <input type="text" class="form-control" id="txtTag" name="TenTag" placeholder="Tên chuyên mục mới"
+                    autofocus value="{{this.nhantag.TenTag}}">
             </div>
             <a class="btn btn-primary" href="/Admin/nhantag" role="button">
                 <i class="fa fa-backward" aria-hidden="true"></i>
@@ -29,8 +30,13 @@
             </button>
         </form>
         {{/if}}
-        
 
-        
+
+
     </div>
 </div>
+{{else}}
+<div class="alert alert-danger" role="alert">
+    Không có quyền truy bập <a href="/" class="alert-link">Trờ lại</a>
+</div>
+{{/ifeq}}

@@ -1,0 +1,106 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="../css/style.css">
+{{/section}}
+
+{{#ifeq authUser.PhanLoaiNguoiDung 'Subscriber'}}
+{{#if conhan }}
+<div class="card shadow mt-3">
+    <h4 class="card-header"> Danh Sách bài viết Premium</h4>
+    <div class="card-body">
+        <div class="row">
+            {{#each this.pre}}
+            <div class="col-4">
+                <div class="contain">
+                    <div class="row">
+                        <div class="col-6">{{{AnhDaiDien}}}</div>
+                        <div class="col-6">
+                            <strong>
+                                {{{TomTat}}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <a href="chitiet/{{IdBaiViet}}">{{TieuDe}}</a>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{/ifeq}}
+
+<div class="card shadow mt-3">
+    <h4 class="card-header"> Danh Sách nổi bật</h4>
+    <div class="card-body">
+        <div class="row">
+            {{#each this.noibat}}
+            <div class="col-4">
+                <div class="contain">
+                    <div class="row">
+                        <div class="col-6">{{{AnhDaiDien}}}</div>
+                        <div class="col-6">
+                            <strong>
+                                {{{TomTat}}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <a href="chitiet/{{IdBaiViet}}">{{TieuDe}}</a>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+
+<div class="card shadow mt-3">
+    <h4 class="card-header"> Danh Sách bài viết được xem nhiều nhất</h4>
+    <div class="card-body">
+        <div class="row">
+            {{#each this.bainoibat}}
+            <div class="col-4">
+                <div class="contain">
+                    <div class="row">
+                        <div class="col-6">{{{AnhDaiDien}}}</div>
+                        <div class="col-6">
+                            <strong>
+                                {{{TomTat}}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <a href="chitiet/{{IdBaiViet}}">{{TieuDe}}</a>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+
+<div class="card shadow mt-3">
+    <h4 class="card-header"> Danh Sách bài viết mới nhất</h4>
+    <div class="card-body">
+        <div class="row">
+            {{#each this.baimoinhat}}
+            <div class="col-4">
+                <div class="contain">
+                    <div class="row">
+                        <div class="col-6">{{{AnhDaiDien}}}</div>
+                        <div class="col-6">
+                            <strong>
+                                {{{TomTat}}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <a href="chitiet/{{IdBaiViet}}">{{TieuDe}}</a>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+<a class="btn btn-lg btn-primary btn-block" href="/all" role="button">
+    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+    All
+</a>

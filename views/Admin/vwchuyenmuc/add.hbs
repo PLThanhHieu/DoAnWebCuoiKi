@@ -1,3 +1,4 @@
+{{#ifeq authUser.PhanLoaiNguoiDung 'Admin'}}
 <div class="shadow" >
     <h4 class="card-header" >
         Chuyên mục mới
@@ -20,3 +21,9 @@
         </form>
     </div>
 </div>
+{{else}}
+    <div class="alert alert-danger" role="alert">
+        Không có quyền truy bập <a href="/" class="alert-link">Trờ lại</a>
+    </div>
+{{/ifeq}}
+

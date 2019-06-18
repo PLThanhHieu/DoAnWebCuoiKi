@@ -1,20 +1,18 @@
 var express=require('express');
 var router=express.Router();
 var chuyenmucModel=require('../../models/chuyenmuc.model');
-router.get('/',(req,res)=>{
+var auth= require('../../middlewares/auth');
+router.get('/',auth,(req,res,next)=>{
     var p= chuyenmucModel.allChuyenMucCap2();
     p.then(rows=>{
-            console.log(rows);
             res.render('Admin/vwchuyenmuc/index',{
                 chuyenmucbaiviet: rows
             });
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 
-router.get('/add',(req,res)=>{
+router.get('/add',auth,(req,res,next)=>{
     res.render('Admin/vwchuyenmuc/add');
 })
 
@@ -31,7 +29,7 @@ router.post('/add',(req,res)=>{
     
 })
 
-router.get('/edit/:id',(req,res)=>{
+router.get('/edit/:id',auth,(req,res)=>{
     var id=req.params.id;
     if(isNaN(id))
     {
@@ -58,16 +56,14 @@ router.get('/edit/:id',(req,res)=>{
     }); 
 })
 
-router.post('/update',(req,res)=>{
+router.post('/update',auth,(req,res,next)=>{
     
     chuyenmucModel.updateChuyenmuc(req.body)
         .then(n=>{
             console.log(n)
             res.redirect('/Admin/chuyenmuc');
         })
-        .catch(err=>{
-            console.log(err);
-        })  
+        .catch(next)  
 })
 
 router.post('/delete',(req,res)=>{
@@ -77,9 +73,7 @@ router.post('/delete',(req,res)=>{
             console.log(n)
             res.redirect('/Admin/chuyenmuc');
         })
-        .catch(err=>{
-            console.log(err);
-        })  
+        .catch(next)  
 })
 
 module.exports=router;

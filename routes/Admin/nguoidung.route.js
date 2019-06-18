@@ -1,7 +1,8 @@
 var express=require('express');
 var router=express.Router();
 var userModel=require('../../models/user.model');
-router.get('/',(req,res,next)=>{
+var auth=require('../../middlewares/auth');
+router.get('/',auth,(req,res,next)=>{
     userModel.all().then(rows=>{
         var edit=new Array();
         var writer= new Array();
@@ -34,7 +35,7 @@ router.get('/',(req,res,next)=>{
     })
 })
 
-router.get('/edit/:id',(req,res)=>{
+router.get('/edit/:id',auth,(req,res,next)=>{
     var id=req.params.id;
     if(isNaN(id))
     {
@@ -58,9 +59,7 @@ router.get('/edit/:id',(req,res)=>{
                 });
             }
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 
 router.post('/update',(req,res,next)=>{
@@ -97,6 +96,52 @@ router.post('/delete',(req,res, next)=>{
         .catch(next)  
 })
 
+router.get('/addwriter',(req,res,next)=>{
+    res.render('Admin/vwnguoidung/themwriter');
+})
+router.post('/addwriter',auth,(req,res,next)=>{
+    var saltRounds=10;
+    var hash=bcrypt.hashSync(req.body.password, saltRounds);
+    var dob=moment(req.body.dob,'DD/MM/YYYY').format('YYYY/MM/DD');
+    var today=new Date();
+    today.setDate(today.getDate()+7);
+    var entity={
+        HoTen: req.body.name,
+        NgaySinh: dob,
+        Email: req.body.email,
+        TaiKhoan: req.body.username,
+        MatKhau: hash,
+        PhanLoaiNguoiDung: 'Writer',
+        ButDanh: req.body.butdanh
+    }
 
+    userModel.add(entity).then(id=>{
+        res.redirect('/Admin/nguoidung');
+    })
+})
+
+router.get('/addeditor',(req,res,next)=>{
+    res.render('Admin/vwnguoidung/themeditor');
+})
+router.post('/addeditor',auth,(req,res,next)=>{
+    var saltRounds=10;
+    var hash=bcrypt.hashSync(req.body.password, saltRounds);
+    var dob=moment(req.body.dob,'DD/MM/YYYY').format('YYYY/MM/DD');
+    var today=new Date();
+    today.setDate(today.getDate()+7);
+    var entity={
+        HoTen: req.body.name,
+        NgaySinh: dob,
+        Email: req.body.email,
+        TaiKhoan: req.body.username,
+        MatKhau: hash,
+        PhanLoaiNguoiDung: 'Editor',
+        ChuyenMucDuocPhanCong: req.body.chuyenmucphancong
+    }
+
+    userModel.add(entity).then(id=>{
+        res.redirect('/Admin/nguoidung');
+    })
+})
 
 module.exports=router;

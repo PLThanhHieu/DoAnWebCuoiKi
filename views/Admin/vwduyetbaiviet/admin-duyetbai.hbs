@@ -16,9 +16,9 @@
   })
 </script>
 {{/section}}
-{{#ifeq authUser.PhanLoaiNguoiDung 'Editor'}}
-<form method="POST" action="/Editor/duyetbai">
 
+{{#ifeq authUser.PhanLoaiNguoiDung 'Admin'}}
+<form method="POST" action="/Admin/duyetbai/duyetbai">
   <div class="card showdow">
     <h4 class="card-header">
       Danh sách bài viết Chờ duyệt
@@ -60,7 +60,7 @@
     <div class="form-group">
       <label for="txtchuthich">Chú thích</label>
       <input type="text" class="form-control" id="txtchuthich" name="ChuThich">
-      <button type="submit" class="btn btn-outline-danger mt-3" formaction="/Editor/tuchoi">
+      <button type="submit" class="btn btn-outline-danger mt-3" formaction="/Admin/duyetbai/tuchoi">
         <i class="fa fa-check" aria-hidden="true"></i>
         Từ chối
       </button>

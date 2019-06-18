@@ -15,6 +15,9 @@ module.exports = {
   singleByEmail: email => {
     return db.load(`select * from nguoidung where Email = '${email}'`);
   },
+  singleByPw: pw => {
+    return db.load(`select * from nguoidung where MatKhau = '${pw}'`);
+  },
   add: entity => {
     return db.add('nguoidung', entity);
   },

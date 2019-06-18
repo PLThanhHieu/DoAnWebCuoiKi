@@ -1,3 +1,4 @@
+{{#ifeq authUser.PhanLoaiNguoiDung 'Writer'}}
 <div class="card showdow">
     <h4 class="card-header">
         Danh sách bài viết Xuất bản
@@ -94,3 +95,10 @@
   </tbody>
 </table>
 </div>
+
+{{else}}
+<div class="alert alert-danger" role="alert">
+  Không có quyền truy bập <a href="/" class="alert-link">Trờ lại</a>
+</div>
+{{/ifeq}}
+

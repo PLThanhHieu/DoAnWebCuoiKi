@@ -1,0 +1,62 @@
+<div class="container-fluid ">
+    <div class="row justify-content-center align-items-center ">
+        <div class="col-sm-4 col-md-3">
+            <form method="POST">
+                <img src="/image/users-vector-icon-png_260862.jpg">
+                <div class="form-group row mt-2" >
+                    <label for="exampleInputEmail1" class="col-3">Họ tên:</label>
+                    <input readonly type="text" class="form-control col-9 " id="txtusername" value="{{authUser.HoTen}}" >
+                </div>
+                <div class="form-group row">
+                    <label for="txtpassword" class="col-3">Ngày sinh:</label>
+                    <input readonly type="text" class="form-control col-9 mt-2" value="{{authUser.NgaySinh}}">
+                </div>
+                <div class="form-group row">
+                    <label for="txtpassword" class="col-3">Email:</label>
+                    <input readonly type="text" class="form-control col-9  mt-2" value="{{authUser.Email}}">
+                </div>
+                <div class="form-group row">
+                    <label for="txtpassword" class="col-3">Tài khoản:</label>
+                    <input readonly type="text" class="form-control col-9  mt-2" value="{{authUser.TaiKhoan}}">
+                </div>
+                <div class="form-group row">
+                    <label for="txtpassword" class="col-3">Loại người dùng:</label>
+                    <input readonly type="text" class="form-control col-9  mt-2" value="{{authUser.PhanLoaiNguoiDung}}">
+                </div>
+
+                {{#ifeq authUser.PhanLoaiNguoiDung 'Editor'}}
+                <div class="form-group row">
+                    <label for="txtpassword" class="col-3">Chuyên mục phụ trách:</label>
+                    {{#each lcchuyenmuc2s}}
+                    {{#ifeq IdChuyenMucCap2 authUser.ChuyenMucDuocPhanCong}}
+                        <input readonly type="text" class="form-control col-9 mt-2" value="{{TenChuyenMucCap2}}">
+                    {{/ifeq}}
+                    {{/each}}
+                    
+                </div>
+                {{/ifeq}}
+
+                {{#ifeq authUser.PhanLoaiNguoiDung 'Writer'}}
+                <div class="form-group row">
+                    <label for="txtpassword" class="col-3">Bút danh:</label>
+                    <input readonly type="text" class="form-control col-9 mt-2" value="{{authUser.ButDanh}}">
+                </div>
+                {{/ifeq}}
+                 {{#ifeq authUser.PhanLoaiNguoiDung 'Subscriber'}}
+                <div class="form-group row">
+                    <label for="txtpassword" class="col-3">Ngày hết hạn tài khoản:</label>
+                    <input readonly type="text" class="form-control col-9 mt-2" value="{{authUser.NgayHetHanTaiKhoan}}">
+                </div>
+                {{/ifeq}}
+
+                <a class="btn btn-success btn-block" href="/Account/edit" role="button">
+                    Chỉnh sữa
+                </a>
+                <a class="btn btn-primary btn-block" href="/Account/doimatkhau" role="button">
+                    Đổi mật khẩu
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

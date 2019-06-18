@@ -5,7 +5,7 @@ var CMC1=require('../../models/chuyenmuc.model');
 var nhantagModel=require('../../models/nhantag.model');
 var router=express.Router();
  
-router.get('/post',(req,res,next)=>{
+router.get('/post',auth,(req,res,next)=>{
     res.render('vwWriter/writer-post');
 })
 
@@ -76,7 +76,7 @@ router.get('/',auth,(req,res,next)=>{
     
 })
 
-router.get('/chitiet/:idbaiviet',(req,res)=>{ 
+router.get('/chitiet/:idbaiviet',auth,(req,res,next)=>{ 
     var idbaiviet=req.params.idbaiviet;
     if(isNaN(idbaiviet))
     {
@@ -98,13 +98,11 @@ router.get('/chitiet/:idbaiviet',(req,res)=>{
                 });
             }
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 
 
-router.get('/update/:id',(req,res)=>{
+router.get('/update/:id',auth,(req,res,next)=>{
     var id=req.params.id;
     if(isNaN(id))
     {
@@ -125,17 +123,24 @@ router.get('/update/:id',(req,res)=>{
                 });
             }
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 
 router.post('/update',(req,res,next)=>{
-    var baiviet=req.body;
-    baiviet.TrangThai='Chờ duyệt';
+    var today=new Date();
+    var baiviet={
+        IdBaiViet: req.body.IdBaiViet,
+        TieuDe: req.body.TieuDe,
+        AnhDaiDien: req.body.AnhDaiDien,
+        TomTat: req.body.TomTat,
+        NoiDungBaiViet: req.body.NoiDungBaiViet,
+        TrangThai: 'Chờ duyệt',
+        NgayDang: today,
+        IdChuyenMucCap1: req.body.IdChuyenMucCap1,
+        LoaiBaiViet: req.body.LoaiBaiViet,
+    }
     baivietModel.updateBaiViet(baiviet)
         .then(n=>{
-            console.log(n)
             res.redirect('/Writer');
         })
         .catch(next)  

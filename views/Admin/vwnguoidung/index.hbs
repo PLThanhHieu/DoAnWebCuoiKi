@@ -1,97 +1,104 @@
+{{#ifeq authUser.PhanLoaiNguoiDung 'Admin'}}
 <div class="card showdow">
-    <h4 class="card-header">
-        Danh sách Editor
-    </h4>
-    <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">ID Editor</th>
-      <th scope="col">Tên</th>
-      <th scope="col">Chuyên mục được phân công</th>
-      <th scope="col" class="text-right">
-        <a class="btn btn-outline-success" href="#" role="button">
-          <i class="fa fa-plus" aria-hidden="true">Thênm Editor</i>
-        </a>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each edit }}
-        <tr>
-          <th scope="row">{{IdNguoiDung}}</th>
-          <td>{{HoTen}}</td>
-          {{#each ../lcchuyenmuc2s}}
-          {{#ifeq IdChuyenMucCap2 ../ChuyenMucDuocPhanCong}}
-          <td>{{TenChuyenMucCap2}}</td>
-          {{/ifeq}}
-          {{/each}}
-          <td class="text-right">
-            <a class="btn btn-primary btn-sm" href="nguoidung/edit/{{IdNguoiDung}}" role="button">
-              <i class="fa fa-pencil" aria-hidden="true"> </i>
-            </a>
-          </td>
-        </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <h4 class="card-header">
+    Danh sách Editor
+  </h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID Editor</th>
+        <th scope="col">Tên</th>
+        <th scope="col">Chuyên mục được phân công</th>
+        <th scope="col" class="text-right">
+          <a class="btn btn-outline-success" href="nguoidung/addeditor" role="button">
+            <i class="fa fa-plus" aria-hidden="true">Thênm Editor</i>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each edit }}
+      <tr>
+        <th scope="row">{{IdNguoiDung}}</th>
+        <td>{{HoTen}}</td>
+        {{#each ../lcchuyenmuc2s}}
+        {{#ifeq IdChuyenMucCap2 ../ChuyenMucDuocPhanCong}}
+        <td>{{TenChuyenMucCap2}}</td>
+        {{/ifeq}}
+        {{/each}}
+        <td class="text-right">
+          <a class="btn btn-primary btn-sm" href="nguoidung/edit/{{IdNguoiDung}}" role="button">
+            <i class="fa fa-pencil" aria-hidden="true"> </i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>
 <div class="card showdow">
-    <h4 class="card-header">
-        Danh sách Writer
-    </h4>
-    <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">ID Witer</th>
-      <th scope="col">Tên Writer</th>
-      <th scope="col">Bút danh</th>
-      <th scope="col" class="text-right">
-        <a class="btn btn-outline-success" href="#" role="button">
-          <i class="fa fa-plus" aria-hidden="true">Thênm Writer</i>
-        </a>
-      </th>
-  </thead>
-  <tbody>
-    {{#each writer}}
-        <tr>
-          <th scope="row">{{IdNguoiDung}}</th>
-          <td>{{HoTen}}</td>
-          <td>{{ButDanh}}</td>
-          <td class="text-right">
-            <a class="btn btn-primary btn-sm" href="nguoidung/edit/{{IdNguoiDung}}" role="button">
-              <i class="fa fa-pencil" aria-hidden="true"> </i>
-            </a>
-          </td>
-        </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <h4 class="card-header">
+    Danh sách Writer
+  </h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID Witer</th>
+        <th scope="col">Tên Writer</th>
+        <th scope="col">Bút danh</th>
+        <th scope="col" class="text-right">
+          <a class="btn btn-outline-success" href="nguoidung/addwriter" role="button">
+            <i class="fa fa-plus" aria-hidden="true">Thênm Writer</i>
+          </a>
+        </th>
+    </thead>
+    <tbody>
+      {{#each writer}}
+      <tr>
+        <th scope="row">{{IdNguoiDung}}</th>
+        <td>{{HoTen}}</td>
+        <td>{{ButDanh}}</td>
+        <td class="text-right">
+          <a class="btn btn-primary btn-sm" href="nguoidung/edit/{{IdNguoiDung}}" role="button">
+            <i class="fa fa-pencil" aria-hidden="true"> </i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>
 <div class="card showdow">
-    <h4 class="card-header">
-        Danh sách Subscribers
-    </h4>
-    <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">ID Subscriber</th>
-      <th scope="col">Tên</th>
-      <th scope="col">Ngày hết hạn tại khoản</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each sub}}
-        <tr>
-          <th scope="row">{{IdNguoiDung}}</th>
-          <td>{{HoTen}}</td>
-          <td>{{NgayHetHanTaiKhoan}}</td>
-          <td class="text-right">
-            <a class="btn btn-primary btn-sm" href="nguoidung/edit/{{IdNguoiDung}}" role="button">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </a>
-          </td>
-        </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <h4 class="card-header">
+    Danh sách Subscribers
+  </h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID Subscriber</th>
+        <th scope="col">Tên</th>
+        <th scope="col">Ngày hết hạn tại khoản</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each sub}}
+      <tr>
+        <th scope="row">{{IdNguoiDung}}</th>
+        <td>{{HoTen}}</td>
+        <td>{{NgayHetHanTaiKhoan}}</td>
+        <td class="text-right">
+          <a class="btn btn-primary btn-sm" href="nguoidung/edit/{{IdNguoiDung}}" role="button">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>
+
+{{else}}
+<div class="alert alert-danger" role="alert">
+  Không có quyền truy bập <a href="/" class="alert-link">Trờ lại</a>
+</div>
+{{/ifeq}}

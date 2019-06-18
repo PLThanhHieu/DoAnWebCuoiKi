@@ -1,5 +1,6 @@
-<div class="shadow" >
-    <h4 class="card-header" >
+{{#ifeq authUser.PhanLoaiNguoiDung 'Admin'}}
+<div class="shadow">
+    <h4 class="card-header">
         Chuyên mục mới
     </h4>
     <div class="card-body">
@@ -13,7 +14,7 @@
                 <label for="exampleInputEmail1">Tên chuyên mục lớn</label>
                 <select name="IdChuyenMucCap2">
                     {{#each lcchuyenmuc2s}}
-                    <option value="{{IdChuyenMucCap2}}" >{{TenChuyenMucCap2}}</option>
+                    <option value="{{IdChuyenMucCap2}}">{{TenChuyenMucCap2}}</option>
                     {{/each}}
                 </select>
             </div>
@@ -28,3 +29,8 @@
         </form>
     </div>
 </div>
+{{else}}
+<div class="alert alert-danger" role="alert">
+    Không có quyền truy bập <a href="/" class="alert-link">Trờ lại</a>
+</div>
+{{/ifeq}}

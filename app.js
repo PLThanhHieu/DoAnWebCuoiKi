@@ -5,7 +5,7 @@ var app=express();
 require('./middlewares/view-engine')(app);
 require('./middlewares/session')(app);
 require('./middlewares/passport')(app);
-require('./middlewares/upload')(app);
+require('./middlewares/upload')(app);   
 
 
 app.use(morgan('dev'));
@@ -21,35 +21,54 @@ app.use(require('./middlewares/chuyenmuccap2'));
 app.use(require('./middlewares/chuyenmuccap1'));
 app.use(require('./middlewares/auth-locals.mdw'));
 
-
-app.get('/',(req,res)=>{  
-    var page=req.query.page || 1;
-    if(page<1) page=1;
-    
-    var limit = 6;
-    var offset =(page-1)*limit; 
+app.get('/',(req,res,next)=>{
     Promise.all([
-       baivietModel.PageAllbaiviet(limit,offset),
-       baivietModel.CountAllbaiviet()
-    ]).then(([rows, count_rows])=>{ 
-        var total =count_rows[0].total;
-        var nPage=Math.floor(total/limit);
-        if(total%limit>0) nPage++;
-        var pages=[];
-        for(i=1;i<=nPage;i++)
-        {
-            var obj={values: i, active: i === +page};
+        baivietModel.loadbaivietnoibat(),
+        baivietModel.load10bainoibat(),
+        baivietModel.load10baivietmoinhat(),
+        baivietModel.loadbaivietPremium(),
+    ]).then(([rows1,rows2,rows3,rows4])=>{
+        var noibat =rows1;
+        var bainoibat=rows2;
+        var baimoinhat=rows3;
+        var pre=rows4;
+        res.render('index',{
+            noibat,
+            bainoibat,
+            baimoinhat,
+            pre
+        })
+    }).catch(next)
+
+})
+
+app.get('/all', (req, res) => {
+    var page = req.query.page || 1;
+    if (page < 1) page = 1;
+
+    var limit = 6;
+    var offset = (page - 1) * limit;
+    Promise.all([
+        baivietModel.PageAllbaiviet(limit, offset),
+        baivietModel.CountAllbaiviet()
+    ]).then(([rows, count_rows]) => {
+        var total = count_rows[0].total;
+        var nPage = Math.floor(total / limit);
+        if (total % limit > 0) nPage++;
+        var pages = [];
+        for (i = 1; i <= nPage; i++) {
+            var obj = { values: i, active: i === +page };
             pages.push(obj);
         }
-        res.render('home',{
+        res.render('home', {
             baiviets: rows,
             pages
         });
-    }).catch(err=>{
+    }).catch(err => {
         console.log(err);
     });
 
-    
+
 })
 
 app.get('/chitiet/:id',(req,res,next)=>{
@@ -71,10 +90,14 @@ app.get('/chitiet/:id',(req,res,next)=>{
                 }
 
                 baivietModel.updateBaiViet(entity).then(()=>{
-                    res.render('chitiet',{
-                        error: false,
-                        baiviet: rows[0],
-                    });
+                    baivietModel.load5bailienquan(rows[0].IdChuyenMucCap1).then(row1=>{
+                        res.render('chitiet',{
+                            error: false,
+                            baiviet: rows[0],
+                            bailienquan:row1
+                        });
+                    })
+                    
                 })
                 
             }
@@ -96,7 +119,9 @@ app.use('/Admin/chuyenmucnho',require('./routes/Admin/chuyenmucnho.route'));
 app.use('/Admin/nhantag',require('./routes/Admin/nhantag.route'));
 app.use('/Admin/duyetbai',require('./routes/Admin/duyetbaiviet.route'));
 app.use('/Admin/nguoidung',require('./routes/Admin/nguoidung.route'));
+app.use('/search',require('./routes/search'));
 //app.use('/Admin/',require('./routes/Admin/admin.route'));
+
 
 app.use((req,res,next)=>{
     res.render('404',{layout :false});
@@ -109,6 +134,8 @@ app.use((error,req,res,next)=>{
         error
     })
 })
+
+
 
 app.listen(3000,()=>{
     console.log('Web Server is running at http://localhost:3000');

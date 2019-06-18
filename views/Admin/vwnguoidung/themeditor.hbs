@@ -1,0 +1,153 @@
+{{#section 'css'}}
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{{/section}}
+
+{{#section 'js'}}
+    <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script>
+        $(function() {
+            $('#txtDOB').datetimepicker({
+                format: 'd/m/Y',
+                timepicker: false,
+                mask: true,
+            });
+        })
+    </script>
+    <script>
+        $(function() {
+
+            $('#formRegister').validate({
+                rules:{
+                    username:{
+                        required: true,
+                        minlength:6,
+                        remote:{
+                            url:'/Account/is-available'
+                        }
+                    },
+                    password:{
+                        required: true,
+                        minlength:6
+                    },
+                    confirm:{
+                        required: true,
+                        equalTo: $('[name="password"]')
+                    },
+                    name:{
+                        required: true,
+                    },
+                    email:{
+                        required: true,
+                        email: true,
+                        remote:{
+                            url:'/Account/is-available-email'
+                        }
+                    },
+                    dob:{
+                        required: true,
+                    }
+                },
+                messages:{
+                    username:{
+                        required: 'Không để trống tài khoản!',
+                        remote: 'Tên tài khoản đã tồn tại!'
+                    },
+                    password:{
+                        required: 'Không để trống mật khẩu!'
+                    },
+                    confirm:{
+                        required: 'Không để trống!',
+                        equalTo: 'Nhập lại mật khẩu khổng đúng!'
+                    },
+                    name:{
+                        required: 'Không để trống tên!',
+                    },
+                    email:{
+                        required: 'Không để trống email!',
+                        email: 'Vui lòng điền đúng định dạng email!',
+                        remote: 'Email đã được sử dụng!'
+                    },
+                    dob:{
+                        required: 'Không để trống ngày sinh!',
+                    }
+                },
+                errorElement:'small',
+                errorClass:'help-block text-danger',
+                highlight: function (e) {
+                    $(e).removeClass('is-valid').addClass('is-invalid');
+                },
+                unhighlight: function (e) {
+                    $(e).removeClass('is-invalid').addClass('is-valid');
+                }
+            });
+        })
+    </script>
+{{/section}}
+
+
+<div class="contain">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form method="POST" id="formRegister" novalidate>
+                <div class="card shadow">
+                    <h4 class="card-header">
+                        Thêm Editor
+                    </h4>
+                    <div class="card-body">
+                        <h5 class="mb-3">Account</h5>
+                        <div class="form-group">
+                            <label for="txtUsername">Tài khoản</label>
+                            <input required type="text" class="form-control" id="txtUsername" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPassword">Mật Khẩu</label>
+                            <input type="password" class="form-control" id="txtPassword" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtConfirm">Nhập lại mật khẩu</label>
+                            <input type="password" class="form-control" id="txtConfirm" name="confirm">
+                        </div>
+
+                        <hr class="mb-4">
+                        <h5 class="mb-3">Thông tin người dùng</h5>
+                        <div class="form-group">
+                            <label for="txtName">Họ tên</label>
+                            <input type="text" class="form-control" id="txtName" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtEmail">Email</label>
+                            <input type="text" class="form-control" id="txtEmail" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtDOB">Ngày sinh</label>
+                            <input type="text" class="form-control" id="txtDOB" name="dob">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtButDanh">Chuyên mục phụ trách</label>
+                            <select name="chuyenmucphancong">
+                                {{#each lcchuyenmuc2s}}
+                                <option value="{{IdChuyenMucCap2}}" >{{TenChuyenMucCap2}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-lg btn-success btn-block">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                           Thêm
+                        </button>
+                            <a class="btn btn-lg btn-primary btn-block" href="/Admin/nguoidung" role="button">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                Hủy
+                            </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+{{#section 'css'}}
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{{/section}}
+
+{{#section 'js'}}
+    <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script>
+        $(function() {
+            $('#txtngaysinh').datetimepicker({
+                format: 'd/m/Y',
+                timepicker: false,
+                mask: true,
+            });
+        })
+    </script>
+    <script>
+        $(function() {
+
+            $('#editnguoidung').validate({
+                rules:{
+                    HoTen:{
+                        required: true,
+                    },
+                    Email:{
+                        required: true,
+                        email: true,
+                        remote:{
+                            url:'/Account/is-available-email'
+                        }
+                    },
+                    NgaySinh:{
+                        required: true,
+                    },
+                    ButDanh:{
+                        required: true,
+                    }
+                },
+                messages:{
+                    HoTen:{
+                        required: 'Không để trống tên!',
+                    },
+                   Email:{
+                        required: 'Không để trống email!',
+                        email: 'Vui lòng điền đúng định dạng email!',
+                        remote: 'Email đã được sử dụng!'
+                    },
+                    NgaySinh:{
+                        required: 'Không để trống ngày sinh!',
+                    }
+
+                    ButDanh:{
+                        required: 'Không để trống ButDanh!',
+                    }
+                },
+                errorElement:'small',
+                errorClass:'help-block text-danger',
+                highlight: function (e) {
+                    $(e).removeClass('is-valid').addClass('is-invalid');
+                },
+                unhighlight: function (e) {
+                    $(e).removeClass('is-invalid').addClass('is-valid');
+                }
+            });
+        })
+    </script>
+{{/section}}
+
+
+<div class="container-fluid ">
+    <div class="row justify-content-center align-items-center ">
+        <div class="col-sm-4 col-md-3">
+            <form method="POST" id="editnguoidung" novalidate>
+                <img src="/image/users-vector-icon-png_260862.jpg">
+                <div class="form-group row mt-2" >
+                    <label for="txtIdNguoiDung" class="col-3">ID:</label>
+                    <input readonly type="text" class="form-control col-9 " id="txtIdNguoiDung" name="IdNguoiDung" value="{{authUser.IdNguoiDung}}" >
+                </div>
+                <div class="form-group row mt-2" >
+                    <label for="txtusername" class="col-3">Họ tên:</label>
+                    <input  type="text" class="form-control col-9 " id="txtusername" name="HoTen" value="{{authUser.HoTen}}" >
+                </div>
+                <div class="form-group row">
+                    <label for="txtngaysinh" class="col-3">Ngày sinh:</label>
+                    <input  type="text" class="form-control col-9 mt-2" id="txtngaysinh" name="NgaySinh" value="{{authUser.NgaySinh}}">
+                </div>
+                <div class="form-group row">
+                    <label for="txtEmail" class="col-3">Email:</label>
+                    <input  type="text" class="form-control col-9  mt-2"  id="txtEmail" name="Email" value="{{authUser.Email}}">
+                </div>
+                <div class="form-group row">
+                    <label for="txtpassword" class="col-3">Tài khoản:</label>
+                    <input readonly type="text" class="form-control col-9  mt-2" value="{{authUser.TaiKhoan}}">
+                </div>
+                <button type="submit" class="btn btn-success btn-block" role="button">
+                    Save
+                </button>
+                <a class="btn btn-primary btn-block" href="/Account/profile" role="button">
+                    Hủy
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
