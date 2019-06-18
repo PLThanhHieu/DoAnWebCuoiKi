@@ -1,0 +1,89 @@
+<div class="shadow" >
+    <h4 class="card-header" >
+        Chỉnh sữa người dùng
+    </h4>
+    <div class="card-body">
+        {{#if this.error}}
+            <div class="alert alert-danger" role="alert">
+                Không tồn tại chuyên mục <a href="/Admin/nguoidung" class="alert-link">Trờ lại</a>
+            </div>
+        {{else}}
+            <form method="POST" action="/Admin/nguoidung/update">
+            <div class="form-group">
+                <label for="txtIdnguoidung">ID</label>
+                <input readonly type="text" class="form-control" id="txtIdnguoidung" name="IdNguoiDung"
+                    placeholder="Tên chuyên mục mới" autofocus value="{{this.nguoidung.IdNguoiDung}}">
+            </div>
+            <div class="form-group">
+                <label for="txthoten">Họ tên</label>
+                <input type="text" class="form-control" id="txthoten" name="HoTen"
+                    placeholder="Tên chuyên mục mới" autofocus value="{{this.nguoidung.HoTen}}">
+            </div>
+
+            {{#ifeq nguoidung.PhanLoaiNguoiDung 'Editor'}}
+                <div class="form-group">
+                    <label for="txtChuyenmucphancong">Phân công chuyên mục</label>
+                    <select name="ChuyenMucDuocPhanCong">
+                        {{#each lcchuyenmuc2s}}
+                        <option value="{{IdChuyenMucCap2}}">{{TenChuyenMucCap2}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <a class="btn btn-primary" href="/Admin/nguoidung" role="button">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                    Back
+                </a>
+                <button type="submit" class="btn btn-outline-danger" formaction="/Admin/nguoidung/delete">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    Delete
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Save
+                </button>
+            {{/ifeq}}
+
+            {{#ifeq nguoidung.PhanLoaiNguoiDung 'Writer'}}
+                <div class="form-group">
+                    <label for="txtbutdanh">Bút danh</label>
+                    <input type="text" class="form-control" id="txtbutdanh" name="ButDanh" placeholder="Tên chuyên mục mới" autofocus
+                        value="{{this.nguoidung.ButDanh}}">
+                </div>
+                <a class="btn btn-primary" href="/Admin/nguoidung" role="button">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                    Back
+                </a>
+                <button type="submit" class="btn btn-outline-danger" formaction="/Admin/nguoidung/delete">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    Delete
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Save
+                </button>
+            {{/ifeq}}
+
+            {{#ifeq nguoidung.PhanLoaiNguoiDung 'Subscriber'}}
+                <div class="form-group">
+                    <label for="txtngayhethan">Ngày tài khoản hết hạn</label>
+                    <p>{{nguoidung.NgayHetHanTaiKhoan}}</p>
+                </div>
+
+                <a class="btn btn-primary" href="/Admin/nguoidung" role="button">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                    Back
+                </a>
+                <button type="submit" class="btn btn-outline-danger" formaction="/Admin/nguoidung/delete">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    Delete
+                </button>
+                <button type="submit" class="btn btn-success" formaction="/Admin/nguoidung/giahan">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Gia hạn tài khoản
+                </button>
+            {{/ifeq}}
+
+        </form>
+        {{/if}}
+    </div>
+</div>

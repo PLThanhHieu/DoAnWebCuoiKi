@@ -1,0 +1,36 @@
+<div class="shadow" >
+    <h4 class="card-header" >
+        Chỉnh sữa chuyên mục
+    </h4>
+    <div class="card-body">
+        {{#if this.error}}
+            <div class="alert alert-danger" role="alert">
+                Không tồn tại Tag <a href="/Admin/nhantag" class="alert-link">Trờ lại</a>
+            </div>
+        {{else}}
+            <form method="POST" action="/Admin/nhantag/update">
+            <div class="form-group">
+                <label for="txtIdTag">ID</label>
+                <input readonly type="text" class="form-control" id="txtIdtag" name="IdTag"
+                    placeholder="Tên chuyên mục mới" autofocus value="{{this.nhantag.IdTag}}">
+            </div>
+            <div class="form-group">
+                <label for="txtChuyenMuc">Tên Tag</label>
+                <input type="text" class="form-control" id="txtTag" name="TenTag"
+                    placeholder="Tên chuyên mục mới" autofocus value="{{this.nhantag.TenTag}}">
+            </div>
+            <a class="btn btn-primary" href="/Admin/nhantag" role="button">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+                Back
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </form>
+        {{/if}}
+        
+
+        
+    </div>
+</div>

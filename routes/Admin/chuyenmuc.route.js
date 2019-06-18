@@ -19,13 +19,11 @@ router.get('/add',(req,res)=>{
 })
 
 router.post('/add',(req,res)=>{
-    var entity={
-        TenChuyenMuc: req.body.TenChuyenMuc
-    }
-    chuyenmucModel.addChuyenmuc(entity)
+    
+    chuyenmucModel.addChuyenmuc(req.body)
         .then(id=>{
             console.log(id)
-            res.render('Admin/vwchuyenmuc/add');
+            res.render('Admin/vwchuyenmuc');
         })
         .catch(err=>{
             console.log(err);

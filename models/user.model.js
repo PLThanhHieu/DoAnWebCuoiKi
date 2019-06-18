@@ -16,7 +16,17 @@ module.exports = {
     return db.load(`select * from nguoidung where Email = '${email}'`);
   },
   add: entity => {
-    return db.addChuyenmuc('nguoidung', entity);
+    return db.add('nguoidung', entity);
   },
+
+  updateUser: entity => {
+    return db.update('nguoidung', 'IdNguoiDung', entity);
+  },
+
+  deleteUser: id => {
+    return db.delete('nguoidung', 'IdNguoiDung', id);
+  },
+
+  
 
 };

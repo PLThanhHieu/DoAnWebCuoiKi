@@ -50,15 +50,17 @@
     </h4>
     <div class="card-body">
         <form method="POST" action="/Writer/update">
-        <div class="form-group">
+            <div class="contain" >
+                <div class="row">
+                   <div class="form-group col-3">
                 <label>ID Bài viết</label>
                 <input readonly type="text" id="txtId" name="IdBaiViet" value="{{this.baiviet.IdBaiViet}}">
             </div>
-            <div class="form-group">
+            <div class="form-group col-3">
                 <label>Tiêu đề:</label>
                 <input type="text" id="txtTieuDe" name="TieuDe" value="{{{this.baiviet.TieuDe}}}">
             </div>
-            <div class="form-group">
+            <div class="form-group col-3">
                 <label>Chuyên mục:</label>
                 <select id="chuyenmuccap1" name="IdChuyenMucCap1">
                     {{#each lcchuyenmuc1s}}
@@ -66,12 +68,14 @@
                     {{/each}}
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group col-3">
                 <label>Loại bài viết:</label>
                 <select id="txtLoaiBaiViet" name="LoaiBaiViet">
                     <option value="Thường">Thường</option>
                     <option value="Premium">Premium</option>
                 </select>
+            </div>
+                </div>
             </div>
             <div class="form-group">
                 <label>Ảnh đại diện:</label>

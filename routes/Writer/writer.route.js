@@ -2,6 +2,7 @@ var express=require('express');
 var baivietModel=require('../../models/baiviet.model');
 var auth=require('../../middlewares/auth');
 var CMC1=require('../../models/chuyenmuc.model');
+var nhantagModel=require('../../models/nhantag.model');
 var router=express.Router();
  
 router.get('/post',(req,res,next)=>{
@@ -9,7 +10,6 @@ router.get('/post',(req,res,next)=>{
 })
 
 router.post('/post',auth,(req,res,next)=>{
-    
     var today=new Date();
     var entity={
         TieuDe: req.body.TieuDe,
@@ -24,9 +24,25 @@ router.post('/post',auth,(req,res,next)=>{
         IdNguoiDung: req.user.IdNguoiDung,
         LoaiBaiViet:req.body.LoaiBaiViet
     }
-    baivietModel.addBaiViet(entity).then(()=>{
-        res.render('/vwWriter/writer-home');
-    }).catch(next)
+    // nhantagModel.addTag(req.body.TenTag).then(()=>{
+    //     res.end('....');
+    // })
+    baivietModel.addBaiViet(entity).then(idbaiviet=>{
+        var tag={
+            TenTag: req.body.TenTag
+        }
+        nhantagModel.addTag(tag).then(idtag=>{
+            var tagbaiviet={
+                IdBaiViet: idbaiviet,
+                IdTag: idtag
+            }
+            nhantagModel.addTagCuabaiViet(tagbaiviet).then(()=>{
+                res.redirect('/Writer');
+            })
+        })
+    }).catch(next);
+      //res.render('/vwWriter/writer-home');
+    
 })
 
 router.get('/upload',(req,res,next)=>{

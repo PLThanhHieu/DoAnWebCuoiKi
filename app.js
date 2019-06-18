@@ -52,7 +52,7 @@ app.get('/',(req,res)=>{
     
 })
 
-app.get('/chitiet/:id',(req,res)=>{
+app.get('/chitiet/:id',(req,res,next)=>{
     var id=req.params.id;
     if(isNaN(id))
     {
@@ -62,10 +62,21 @@ app.get('/chitiet/:id',(req,res)=>{
     }
     baivietModel.single(id).then(rows=>{
             if(rows.length>0){
-                res.render('chitiet',{
-                    error: false,
-                    baiviet: rows[0],
-                });
+                var luotxem=rows[0].LuotXem;
+                luotxem=luotxem+1;
+                rows[0].LuotXem=luotxem;
+                var entity ={
+                    IdBaiViet: id,
+                    LuotXem: rows[0].LuotXem
+                }
+
+                baivietModel.updateBaiViet(entity).then(()=>{
+                    res.render('chitiet',{
+                        error: false,
+                        baiviet: rows[0],
+                    });
+                })
+                
             }
             else{
                 res.render('chitiet',{
@@ -74,9 +85,7 @@ app.get('/chitiet/:id',(req,res)=>{
                 });
             }
         }
-    ).catch(err=>{
-        console.log(err);
-    }); 
+    ).catch(next); 
 })
 app.use('/chuyenmuc', require('./routes/baiviettheochuyenmuc.route'));
 app.use('/Admin/chuyenmuc', require('./routes/Admin/chuyenmuc.route'));
@@ -84,6 +93,11 @@ app.use('/Account', require('./routes/account.route'));
 app.use('/Writer',require('./routes/Writer/writer.route'));
 app.use('/Editor',require('./routes/Editor/editor.router'));
 app.use('/Admin/chuyenmucnho',require('./routes/Admin/chuyenmucnho.route'));
+app.use('/Admin/nhantag',require('./routes/Admin/nhantag.route'));
+app.use('/Admin/duyetbai',require('./routes/Admin/duyetbaiviet.route'));
+app.use('/Admin/nguoidung',require('./routes/Admin/nguoidung.route'));
+//app.use('/Admin/',require('./routes/Admin/admin.route'));
+
 app.use((req,res,next)=>{
     res.render('404',{layout :false});
 })
