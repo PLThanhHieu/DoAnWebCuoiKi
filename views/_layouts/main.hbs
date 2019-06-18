@@ -48,7 +48,43 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/Account/profile">
                   <i class="fa fa-user" aria-hidden="true"></i>
-                  Profile</a>
+                  Profile
+                </a>
+                {{#ifeq authUser.PhanLoaiNguoiDung 'Admin'}}
+                  <a class="dropdown-item" href="/Admin/nguoidung">
+                    <i class="fa fa-users " aria-hidden="true"></i>
+                    Quản lý người dùng
+                  </a>
+                  <a class="dropdown-item" href="/Admin/chuyenmuc">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    Quản lý chuyên mục lớn
+                  </a>
+                  <a class="dropdown-item" href="/Admin/chuyenmucnho">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    Quản lý chuyên mục nhỏ
+                  </a>
+                  <a class="dropdown-item" href="/Admin/nhantag">
+                    <i class="fa fa-tags" aria-hidden="true"></i>
+                    Quản lý Tag
+                  </a>
+                  <a class="dropdown-item" href="/Admin/duyetbai">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                   Quản lý bài viết
+                  </a>
+                {{/ifeq}}
+                {{#ifeq authUser.PhanLoaiNguoiDung 'Editor'}}
+                  <a class="dropdown-item" href="/Editor">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                   Duyệt bài viết
+                  </a>
+
+                {{/ifeq}}
+                {{#ifeq authUser.PhanLoaiNguoiDung 'Writer'}}
+                  <a class="dropdown-item" href="/Writer">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                   Quản lý bài viết
+                  </a>
+                {{/ifeq}}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="javascript: $('#formSignOut').submit();">
                   <i class="fa fa-sign-out" aria-hidden="true"></i>
